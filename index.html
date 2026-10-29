@@ -150,7 +150,52 @@
       <button class="btn" style="width:100%; margin-top:10px;" onclick="closeModal('modalTask')">Tutup</button>
     </div>
   </div>
+<!-- Modal Tambah Jadwal Tetap -->
+  <div class="modal" id="modalSchedule">
+    <div class="modal-content">
+      <h3>Tambah Jadwal Tetap</h3>
+      <select id="schedHari">
+        <option value="0">Senin</option>
+        <option value="1">Selasa</option>
+        <option value="2">Rabu</option>
+        <option value="3">Kamis</option>
+        <option value="4">Jumat</option>
+        <option value="5">Sabtu</option>
+        <option value="6">Minggu</option>
+      </select>
+      <input type="time" id="schedMulai" placeholder="Jam Mulai">
+      <input type="time" id="schedSelesai" placeholder="Jam Selesai">
+      <input type="text" id="schedMatkul" placeholder="Mata Kuliah">
+      <input type="text" id="schedDosen" placeholder="Nama Dosen">
+      <input type="text" id="schedRuang" placeholder="Ruangan">
+      <select id="schedJenis">
+        <option value="Tatap Muka">Tatap Muka</option>
+        <option value="Daring">Daring</option>
+        <option value="Praktik">Praktik</option>
+        <option value="Ujian">Ujian</option>
+      </select>
+      <button class="btn btn-primary" style="width:100%; margin-top:10px;" id="btnSaveSchedule">Simpan Jadwal</button>
+      <button class="btn" style="width:100%; margin-top:10px;" onclick="closeModal('modalSchedule')">Tutup</button>
+    </div>
+  </div>
 
+  <!-- Modal Ubah / Tambah Sesi Khusus -->
+  <div class="modal" id="modalOverride">
+    <div class="modal-content">
+      <h3>Sesi Khusus Harian</h3>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0;">(Menerapkan perubahan khusus pada tanggal yang dipilih di kalender)</p>
+      <input type="text" id="overMatkul" placeholder="Mata Kuliah">
+      <input type="time" id="overMulai">
+      <input type="time" id="overSelesai">
+      <input type="text" id="overRuang" placeholder="Ruangan">
+      <select id="overStatus">
+        <option value="ubah">Tetap Masuk (Ubah/Tambah Sesi)</option>
+        <option value="libur">Libur / Dibatalkan</option>
+      </select>
+      <button class="btn btn-primary" style="width:100%; margin-top:10px;" id="btnSaveOverride">Simpan Perubahan</button>
+      <button class="btn" style="width:100%; margin-top:10px;" onclick="closeModal('modalOverride')">Tutup</button>
+    </div>
+  </div>
   <!-- Firebase Scripts -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
