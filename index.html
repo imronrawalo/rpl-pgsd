@@ -390,7 +390,42 @@
         batas: document.getElementById('taskBatas').value
       }).then(() => closeModal('modalTask'));
     };
+// Fungsi Simpan Jadwal Tetap
+    document.getElementById('btnSaveSchedule').onclick = () => {
+      addDoc(collection(db, "schedules"), {
+        hari: parseInt(document.getElementById('schedHari').value),
+        mulai: document.getElementById('schedMulai').value,
+        selesai: document.getElementById('schedSelesai').value,
+        matkul: document.getElementById('schedMatkul').value,
+        dosen: document.getElementById('schedDosen').value,
+        ruang: document.getElementById('schedRuang').value,
+        jenis: document.getElementById('schedJenis').value
+      }).then(() => {
+        alert("Jadwal tetap berhasil ditambahkan!");
+        document.getElementById('schedMatkul').value = ''; // Kosongkan form
+        closeModal('modalSchedule');
+      }).catch(err => alert("Gagal menyimpan jadwal: " + err.message));
+    };
 
+    // Fungsi Simpan Perubahan Khusus (Override)
+    document.getElementById('btnSaveOverride').onclick = () => {
+      // Ambil tanggal yang sedang diklik di kalender
+      const day = selectedDate.getDate();
+      const dateStr = `${currentYear}-${String(currentMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      
+      addDoc(collection(db, "overrides"), {
+        tanggal: dateStr,
+        matkul: document.getElementById('overMatkul').value,
+        mulai: document.getElementById('overMulai').value,
+        selesai: document.getElementById('overSelesai').value,
+        ruang: document.getElementById('overRuang').value,
+        status: document.getElementById('overStatus').value
+      }).then(() => {
+        alert("Sesi khusus untuk tanggal " + dateStr + " berhasil disimpan!");
+        closeModal('modalOverride');
+        selectDate(day); // Refresh daftar jadwal harian
+      }).catch(err => alert("Gagal menyimpan sesi khusus: " + err.message));
+    };
     // CSV Parse Logic
     window.downloadCSVTemplate = function() {
       const csv = `tipe,hari_tanggal,mulai,selesai,matkul,dosen,ruang,jenis,judul_tugas,pengiriman,batas\njadwal,0,08:00,09:40,Matematika Dasar,Budi,Ruang 1,Tatap Muka,,,\ntugas,,,,Matematika Dasar,,,,Tugas 1,SPADA,2026-11-20 23:59`;
